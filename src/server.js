@@ -33,7 +33,7 @@ export default [
             corporis fugit, modi ipsa voluptatibus nam mollitia suscipit
              reprehenderit aliquam vel veniam exercitationem, neque explicabo!`,
         },
-        rightoption: 2
+        rightoption: 3
     },
     {
         question: 'store as they are bound to the store itself too:',
@@ -51,7 +51,7 @@ export default [
             corporis fugit, modi ipsa voluptatibus nam mollitia suscipit
              reprehenderit aliquam vel veniam exercitationem, neque explicabo!`,
         },
-        rightoption: 2
+        rightoption: 1
     },
     {
         question: 'state from the store but not calling any action. Note you can destructure actions directly from the',
@@ -87,7 +87,7 @@ export default [
             corporis fugit, modi ipsa voluptatibus nam mollitia suscipit
              reprehenderit aliquam vel veniam exercitationem, neque explicabo!`,
         },
-        rightoption: 2
+        rightoption: 4
     },
     {
         question: ' but skip any action or non reactive (non ref/reactive) property',
@@ -105,7 +105,7 @@ export default [
             corporis fugit, modi ipsa voluptatibus nam mollitia suscipit
              reprehenderit aliquam vel veniam exercitationem, neque explicabo!`,
         },
-        rightoption: 2
+        rightoption: 3
     },
     {
         question: 'This will also create refs for properties added by plugins',
@@ -159,7 +159,7 @@ export default [
             corporis fugit, modi ipsa voluptatibus nam mollitia suscipit
              reprehenderit aliquam vel veniam exercitationem, neque explicabo!`,
         },
-        rightoption: 2
+        rightoption: 3
     },
     {
         question: 'There is also another possible syntax to define stores.',
@@ -177,7 +177,7 @@ export default [
             corporis fugit, modi ipsa voluptatibus nam mollitia suscipit
              reprehenderit aliquam vel veniam exercitationem, neque explicabo!`,
         },
-        rightoption: 2
+        rightoption: 4
     }
 
 ]

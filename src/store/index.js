@@ -12,6 +12,7 @@ export const useStore = defineStore('game',()=>{
         currentQuestionPostion: 0,
         totalQuestion: questions.length,
         currentQuestion: questions[0],
+        selectedQuestion: null,
         user:{
             //número de perguntas acetadas
             score: 0,
@@ -28,7 +29,16 @@ export const useStore = defineStore('game',()=>{
             let newQuestionPosition = state.currentQuestionPostion++
 
             state.currentQuestion = questions[newQuestionPosition]
-            toast('Boa! continua assim.')
+
+            if(state.selectedQuestion && state.selectedQuestion == state.currentQuestion.rightoption){
+                
+                toast.success('Boa! continua assim.') 
+
+                return
+            }
+
+            toast.error('Resposta errada, pode tentar denovo no final do jogo .') 
+            
             console.log(state.currentQuestion)
 
         }
