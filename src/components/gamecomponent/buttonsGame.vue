@@ -13,4 +13,5 @@ import buttonGame from "./buttonGame.vue"
 import {useStore} from '../../store'
 
 const store = useStore()
+
 </script>

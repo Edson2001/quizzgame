@@ -78,6 +78,10 @@ body{
                 margin-bottom: 12px;
                 &:hover{
                     cursor: pointer;
+                    border: 1px solid #2193eb;
+                    .check-option{
+                        background: #2193eb;
+                    }
                 }
                 .check-option{
                     border: 1px solid #6c7074;
@@ -85,10 +89,13 @@ body{
                     height: 30px;
                     width: 30px;
                     margin-right: 20px;
-                   
                     &:hover{
                         cursor: pointer;
                     }
+                }
+                
+                .text-option{
+                    max-width: 700px;
                 }
             }
         }
