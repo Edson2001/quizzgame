@@ -5,22 +5,23 @@
         <button>
             Sair
         </button>
-        <button @click="store.nextQuestion">Próximo</button>
+        <button @click="nextQuestion">Próximo</button>
     </div>
 
 </template>
 <script setup>
 
-import {useStore} from '../../store'
-import io from "socket.io-client"
-import { defineEmits } from 'vue';
-const socket = io('http://localhost:3030/')
 
-const store = useStore()
+import io from "socket.io-client"
+
+import { defineEmits } from 'vue'
+
+const socket = io('http://localhost:3030/')
 
 const emit = defineEmits()
 
 const newUrl = new URLSearchParams(window.location.search)
+
 const userName = newUrl.get('name')
 
 socket.emit('setUser', {
@@ -30,14 +31,14 @@ socket.emit('setUser', {
     name: userName,
 })
 
-socket.on('setUser', (users) =>{
-    store.state.users = users
-})
-
-const initGame = ()=>{
-    console.log("emitindo evento")
-    emit('startTimeGame', 20)
+const nextQuestion = ()=>{
+    socket.emit('nextQuestion', userName)
 }
 
+const initGame = ()=>{
+    
+    emit('startTimeGame', 20)
+
+}
 
 </script>

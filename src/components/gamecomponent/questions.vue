@@ -1,14 +1,14 @@
 <template>
      <div class="game-text">
-        <p>{{question.question}}</p>
+        <p>{{question}}</p>
     </div>
 </template>
 <script setup>
 
-import {useStore} from '../../store'
-import { computed, ref, watch } from 'vue';
-const store = useStore()
+import { computed, defineProps } from 'vue';
 
-const question = computed(()=>store.state.currentQuestion)
+const props = defineProps({
+    question: String
+})
 
 </script>

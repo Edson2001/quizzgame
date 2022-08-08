@@ -5,11 +5,11 @@
             <div class="gameDetail">
                 <div class="range-state-options">
                     <div class="range">
-                        <span :style="`width: ${(store.state.currentQuestionPostion*10)}%;`"></span>
+                        <span :style="`width: ${(gameState.currentQuestionPostion*10)}%;`"></span>
                     </div>
-                    <div class="counter">{{store.state.gameCountQuestion}} de {{store.state.totalQuestion}}</div>
+                    <div class="counter">{{gameState.gameCountQuestion}} de {{gameState.totalQuestion}}</div>
                     <ul>
-                        <li v-for="(user, index) in users" :key="index">
+                        <li v-for="(user, index) in gameState.users" :key="index">
                             <p>{{user.name}}</p> Pontos: {{user.score}} | Perguntas certas: {{user.totalQuestionsCorret}} 
                         </li>
                         
@@ -25,11 +25,11 @@
                 </div>
             </div>
             
-            <game-text />
+            <game-text :question="question" />
 
-            <game-options />
+            <game-options  :options="options" />
 
-            <buttonsGame @startTimeGame="startGame" />
+            <buttonsGame @startTimeGame="startTime" />
 
        </div>
     </div>
@@ -45,19 +45,26 @@ import buttonsGame from "./gamecomponent/buttonsGame.vue"
 import {computed, ref} from "vue"
 import {useStore} from '../store'
 import { useToast } from "vue-toastification"
-
 import io from "socket.io-client"
 
-const socket = io('http://localhost:3030/')
 
+const socket = io('http://localhost:3030/')
 const toast = useToast()
 const timeGame = ref(0)
 const store = useStore();
-
-const users = computed(()=> store.state.users)
+const options = ref({})
+const question = ref('')
+const gameState = ref([])
 
 socket.on('userOut', (username)=>{
     toast.warning("Usuario "+username+" Saiu do jogo")    
+})
+
+socket.on('sendState', (game)=>{
+    options.value = game.currentQuestion.options
+    question.value = game.currentQuestion.question
+    gameState.value = game
+    console.log(gameState)
 })
 
 function startTimer(duration) {
@@ -72,17 +79,20 @@ function startTimer(duration) {
         timeGame.value = minutes + ":" + seconds;
 
         if (--timer < 0) {
+            socket.emit('endGame', '')
             console.log('is end')
             timer = duration;
         }
     }, 1000);
 }
 
-const startGame = (time)=>{
+const startTime = (time)=>{
     console.log("recebendo evento")
+
     socket.emit("initGame", time)
 
 }
+
 socket.on("startTime", (time)=>{
 
     startTimer(time)

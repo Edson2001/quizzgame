@@ -149,3 +149,14 @@ body{
     }
     
 }
+@media (max-width: 700px){
+
+    .game{
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        .game-counter {
+            margin-bottom: 10px !important;
+        }
+    }
+
+}

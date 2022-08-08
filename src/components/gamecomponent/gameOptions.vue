@@ -1,6 +1,6 @@
 <template>
     <ul class="game-options ">
-        <li v-for="(item, key) in question.options" @click="selectQuestion(key)" :class="selected.index == key ? selected.class : ''" :key="key">
+        <li v-for="(item, key) in options" @click="selectQuestion(key)" :class="selected.index == key ? selected.class : ''" :key="key">
             <div class="check-option "></div>
             <div class="text-option">{{item}} </div>
         </li>
@@ -8,11 +8,12 @@
 </template>
 
 <script setup>
-
-import {useStore} from '../../store'
-import { computed, ref } from 'vue'
-
-const store = useStore()
+import { computed, ref, defineProps } from 'vue'
+import io from "socket.io-client"
+const socket = io('http://localhost:3030/')
+const props = defineProps({
+    options:{}
+})
 
 const selected = ref({
     class: '',
@@ -23,11 +24,7 @@ function selectQuestion(index){
 
     selected.value.class = 'selected'
     selected.value.index = index
-
-    store.state.selectedQuestion = index 
-
+    socket.emit('selectedQuestion', index)
 }
-
-const question = computed(()=>store.state.currentQuestion)
 
 </script>
