@@ -27,6 +27,7 @@ body{
         border-radius: 5px;
         .counter{
             color: #61657f;
+            margin-bottom: 12px;
         }
         .range-state-options{
             .range{
@@ -42,6 +43,18 @@ body{
                     border-radius: 10px;
                 }
                 margin-bottom: 10px;
+            }
+            ul{
+                list-style: none;
+                li{
+                    margin-bottom: 12px;
+                    &:first-child{
+                        color: greenyellow;
+                    }
+                    &:last-child{
+                        color: tomato;
+                    }
+                }
             }
         }
         .game-counter{
@@ -83,15 +96,14 @@ body{
                 &:hover{
                     cursor: pointer;
                     border: 1px solid #2193eb;
-                    .check-option{
-                        background: #2193eb;
-                    }
+                    
                 }
                 .check-option{
                     border: 1px solid #6c7074;
                     border-radius: 50%;
                     height: 30px;
-                    width: 30px;
+                    max-width: 30px;
+                    width: 100%;
                     margin-right: 20px;
                     &:hover{
                         cursor: pointer;

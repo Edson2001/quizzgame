@@ -7,7 +7,13 @@
                     <div class="range">
                         <span :style="`width: ${(store.state.currentQuestionPostion*10)}%;`"></span>
                     </div>
-                    <div class="counter">{{store.state.currentQuestionPostion}} de {{store.state.totalQuestion}}</div>
+                    <div class="counter">{{store.state.gameCountQuestion}} de {{store.state.totalQuestion}}</div>
+                    <ul>
+                        <li v-for="(user, index) in users" :key="index">
+                            <p>{{user.name}}</p> Pontos: {{user.score}} | Perguntas certas: {{user.totalQuestionsCorret}} 
+                        </li>
+                        
+                    </ul>
                 </div>
                 <div class="game-counter">
                     <span>Tempo restante</span>
@@ -23,7 +29,7 @@
 
             <game-options />
 
-            <buttonsGame />
+            <buttonsGame @startTimeGame="startGame" />
 
        </div>
     </div>
@@ -36,14 +42,26 @@ import gameText from "./gamecomponent/questions.vue"
 import gameOptions from "./gamecomponent/gameOptions.vue"
 import buttonsGame from "./gamecomponent/buttonsGame.vue"
 
-import {ref} from "vue"
+import {computed, ref} from "vue"
 import {useStore} from '../store'
+import { useToast } from "vue-toastification"
 
+import io from "socket.io-client"
+
+const socket = io('http://localhost:3030/')
+
+const toast = useToast()
 const timeGame = ref(0)
-const store = useStore()
+const store = useStore();
+
+const users = computed(()=> store.state.users)
+
+socket.on('userOut', (username)=>{
+    toast.warning("Usuario "+username+" Saiu do jogo")    
+})
 
 function startTimer(duration) {
-    var timer = duration, minutes, seconds;
+    let timer = duration, minutes, seconds;
     setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
@@ -54,15 +72,21 @@ function startTimer(duration) {
         timeGame.value = minutes + ":" + seconds;
 
         if (--timer < 0) {
+            console.log('is end')
             timer = duration;
         }
     }, 1000);
 }
 
+const startGame = (time)=>{
+    console.log("recebendo evento")
+    socket.emit("initGame", time)
 
-    var fiveMinutes = 60 * 5
-       
-    startTimer(fiveMinutes)
+}
+socket.on("startTime", (time)=>{
 
+    startTimer(time)
+            
+})
 
 </script>
