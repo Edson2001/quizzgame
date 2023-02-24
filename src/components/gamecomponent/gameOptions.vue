@@ -8,9 +8,12 @@
 </template>
 
 <script setup>
+
 import {ref, defineProps } from 'vue'
 import io from "socket.io-client"
+
 const socket = io(import.meta.env.VITE_SERVER_HOST)
+
 const props = defineProps({
     options:{}
 })
@@ -21,7 +24,6 @@ const selected = ref({
 })
 
 function selectQuestion(index){
-
     selected.value.class = 'selected'
     selected.value.index = index
     socket.emit('selectedQuestion', index)

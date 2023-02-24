@@ -10,35 +10,32 @@
 
 </template>
 <script setup>
-
-
 import io from "socket.io-client"
-
-import { defineEmits } from 'vue'
+import { defineEmits, onMounted, ref } from 'vue'
 
 const socket = io(import.meta.env.VITE_SERVER_HOST)
-
 const emit = defineEmits()
+const userName = ref('')
 
-const newUrl = new URLSearchParams(window.location.search)
+onMounted(()=>{
 
-const userName = newUrl.get('name')
-console.log(userName)
-socket.emit('setUser', {
-    score: 0,
-    totalQuestionsCorret: 0,
-    timedGame: 0,
-    name: userName,
+    const newUrl = new URLSearchParams(window.location.search)
+    userName.value = newUrl.get('name')
+
+    socket.emit('setUser', {
+        score: 0,
+        totalQuestionsCorret: 0,
+        timedGame: 0,
+        name: userName,
+    })
 })
 
 const nextQuestion = ()=>{
     socket.emit('nextQuestion', userName)
 }
 
-const initGame = ()=>{
-    
+const initGame = ()=>{    
     emit('startTimeGame', 20)
-
 }
 
 </script>
