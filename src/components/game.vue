@@ -64,6 +64,7 @@ onMounted(()=>{
     })
 
     socket.on('sendState', (game)=>{
+        console.log(game)
         game.value.options = game.currentQuestion.options
         game.value.question = game.currentQuestion.question
         game.value.gameState = game

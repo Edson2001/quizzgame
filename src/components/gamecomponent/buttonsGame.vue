@@ -20,13 +20,14 @@ const userName = ref('')
 onMounted(()=>{
 
     const newUrl = new URLSearchParams(window.location.search)
+    
     userName.value = newUrl.get('name')
 
     socket.emit('setUser', {
         score: 0,
         totalQuestionsCorret: 0,
         timedGame: 0,
-        name: userName,
+        name: userName.value,
     })
 })
 
