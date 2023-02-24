@@ -42,16 +42,14 @@ import gameText from "./gamecomponent/questions.vue"
 import gameOptions from "./gamecomponent/gameOptions.vue"
 import buttonsGame from "./gamecomponent/buttonsGame.vue"
 
-import {computed, ref} from "vue"
+import {ref} from "vue"
 import {useStore} from '../store'
 import { useToast } from "vue-toastification"
 import io from "socket.io-client"
 
-
-const socket = io('http://localhost:3030/')
+const socket = io(import.meta.env.VITE_SERVER_HOST)
 const toast = useToast()
 const timeGame = ref(0)
-const store = useStore();
 const options = ref({})
 const question = ref('')
 const gameState = ref([])
