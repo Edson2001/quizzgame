@@ -43,7 +43,7 @@ import gameOptions from "./gamecomponent/gameOptions.vue"
 import buttonsGame from "./gamecomponent/buttonsGame.vue"
 
 import {ref} from "vue"
-import {useStore} from '../store'
+
 import { useToast } from "vue-toastification"
 import io from "socket.io-client"
 
