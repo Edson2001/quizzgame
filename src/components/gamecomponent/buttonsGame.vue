@@ -16,7 +16,7 @@ import io from "socket.io-client"
 
 import { defineEmits } from 'vue'
 
-const socket = io('http://localhost:3030/')
+const socket = io(import.meta.env.VITE_SERVER_HOST)
 
 const emit = defineEmits()
 
