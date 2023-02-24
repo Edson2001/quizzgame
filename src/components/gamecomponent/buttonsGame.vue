@@ -23,7 +23,7 @@ const emit = defineEmits()
 const newUrl = new URLSearchParams(window.location.search)
 
 const userName = newUrl.get('name')
-
+console.log(userName)
 socket.emit('setUser', {
     score: 0,
     totalQuestionsCorret: 0,
