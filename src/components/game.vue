@@ -86,15 +86,12 @@ function startTimer(duration) {
 
 const startTime = (time)=>{
     console.log("recebendo evento")
-
     socket.emit("initGame", time)
 
 }
 
 socket.on("startTime", (time)=>{
-
     startTimer(time)
-            
 })
 
 </script>

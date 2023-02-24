@@ -8,9 +8,9 @@
 </template>
 
 <script setup>
-import { computed, ref, defineProps } from 'vue'
+import {ref, defineProps } from 'vue'
 import io from "socket.io-client"
-const socket = io('http://localhost:3030/')
+const socket = io(import.meta.env.VITE_SERVER_HOST)
 const props = defineProps({
     options:{}
 })
